@@ -12,6 +12,13 @@ base {
 
 repositories {}
 
+sourceSets {
+  testmod {
+    runtimeClasspath += main.runtimeClasspath
+    compileClasspath += main.compileClasspath
+  }
+}
+
 loom {
 	splitEnvironmentSourceSets()
 
@@ -21,6 +28,22 @@ loom {
 			sourceSet sourceSets.client
 		}
 	}
+
+	runs {
+    testmodClient {
+			inherit client
+
+      name = "Test Mod Client"
+      source sourceSets.testmod
+    }
+
+    testmodServer {
+			inherit server
+
+      name = "Test Mod Server"
+      source sourceSets.testmod
+    }
+  }
 }
 
 dependencies {
@@ -29,6 +52,8 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+	testmodImplementation sourceSets.main.output
 }
 
 processResources {
