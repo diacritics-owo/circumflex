@@ -13,5 +13,7 @@ public class TestMod implements ModInitializer {
 		System.out.println("hello :3");
 
 		Commands.initialize();
+
+		new TestModItems().register(MOD_ID);
 	}
 }
