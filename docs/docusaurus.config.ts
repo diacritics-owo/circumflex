@@ -8,7 +8,7 @@ const config: Config = {
   favicon: 'img/favicon.ico',
 
   url: 'https://diacritics-owo.github.io/',
-  baseUrl: '/',
+  baseUrl: '/circumflex/',
 
   organizationName: 'diacritics-owo',
   projectName: 'circumflex',
@@ -39,7 +39,7 @@ const config: Config = {
     navbar: {
       title: 'Circumflex',
       logo: {
-        alt: 'My Site Logo',
+        alt: 'circumflex logo',
         src: 'img/logo.svg',
       },
       items: [
