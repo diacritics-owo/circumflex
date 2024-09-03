@@ -45,7 +45,7 @@ public abstract class RegistryInitializer<T> {
   }
 
   @SuppressWarnings("unchecked")
-  private final T getFieldValue(Pair<Boolean, Field> fieldData) {
+  protected final T getFieldValue(Pair<Boolean, Field> fieldData) {
     boolean registryEntry = fieldData.first;
     Field field = fieldData.second;
 
@@ -57,14 +57,14 @@ public abstract class RegistryInitializer<T> {
     }
   }
 
-  private void register(Identifier identifier, Pair<Boolean, Field> fieldData) {
+  protected void register(Identifier identifier, Pair<Boolean, Field> fieldData) {
     Registry.register(this.registry(), identifier, getFieldValue(fieldData));
     this.afterRegistration(identifier, fieldData);
   }
 
-  private void afterRegistration(Identifier identifier, Pair<Boolean, Field> fieldData) {
+  protected void afterRegistration(Identifier identifier, Pair<Boolean, Field> fieldData) {
     afterRegistration(identifier, getFieldValue(fieldData));
   }
 
-  private void afterRegistration(Identifier identifier, T value) {}
+  protected void afterRegistration(Identifier identifier, T value) {}
 }
