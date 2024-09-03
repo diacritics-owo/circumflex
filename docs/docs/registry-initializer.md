@@ -14,8 +14,8 @@ The following is how one would generally register things into a registry:
 
 ```java title="src/main/java/com/example/item/MyModItems.java"
 public class MyModItems {
-  public static Item ITEM = register("item", new Item(...));
-  public static Item ANOTHER_ITEM = register("second_item", new Item(...)); // notice that the id doesn't match the field name
+  public static final Item ITEM = register("item", new Item(...));
+  public static final Item ANOTHER_ITEM = register("second_item", new Item(...)); // notice that the id doesn't match the field name
 
   public static Item register(String id, Item item) {
     return Registry.register(Registries.ITEM, Identifier.of(MyMod.MOD_ID, id), item);
@@ -41,15 +41,15 @@ With the registry initializer API, this can be simplified to:
 public class MyModItems extends ItemRegistryInitializer {
   @Group("tools_and_utilities")
   @Group(namespace = MyMod.MOD_ID, value = "custom_group")
-  public Item ITEM = new Item(...);
+  public static final Item ITEM = new Item(...);
 
   @Id("second_item")
   @Group("tools_and_utilities")
-  public Item ANOTHER_ITEM = new Item(...);
+  public static final Item ANOTHER_ITEM = new Item(...);
 }
 ```
 
-In the mod initializer, you would then call `new MyModItems().register(MOD_ID)`.
+In the mod initializer, you would then call `RegistryInitializer.register(MyModItems.class, MOD_ID)`.
 
 Note that registry initializers also support fields of type `RegistryEntry`, and that fields not of type `T` or `RegistryEntry<T>` will be ignored.
 
@@ -73,7 +73,7 @@ Creating a registry initializer for a registry that Circumflex doesn't provide o
 public class ParticleTypeRegistryInitializer extends RegistryInitializer<ParticleType> {
   @Override
   public Class<ParticleType> entryClass() {
-    return ParticleType.class; // if it has a generic, e.g. BlockEntityType<T>, use Helpers.conform
+    return ParticleType.class; // if it's generic, e.g. BlockEntityType<T>, use Helpers.conform
   }
 
   @Override
@@ -87,7 +87,7 @@ And you're done! You can now create a class extending `ParticleTypeRegistryIniti
 
 ### Advanced Usage
 
-Using custom registry initializers as above will be enough for most use cases, but you cannot, for example, do things like dynamically registering `BlockItem`s or using custom annotations. For this, you must override either `void afterRegistration(Identifier identifier, T value)` or (not recommended) `void afterRegistration(Identifier identifier, Pair<Boolean, Field> fieldData)`.
+Using custom registry initializers as above will be enough for most use cases, but you cannot, for example, do things like dynamically register `BlockItem`s or use custom annotations. To do so, you must override either `void afterRegistration(Identifier identifier, T value)` or (not recommended) `void afterRegistration(Identifier identifier, Pair<Boolean, Field> fieldData)`.
 
 ```java
 public class ... {
@@ -98,15 +98,17 @@ public class ... {
     // do things here
   }
 
-  protected void afterRegistration(Identifier identifier, Pair<Boolean, Field> fieldData) {
+  // only override this if you need to use custom annotations
+  protected void afterRegistration(
+    Identifier identifier,
+    Pair<Boolean, Field> fieldData /// the first item is a boolean indicating whether the field is a registryentry, and the second is a java.lang.reflect.Field
+  ) {
     // the default implementation is just: this.afterRegistration(identifier, this.getFieldValue(fieldData))
   }
 
   ...
 }
 ```
-
-It is not recommended to do this, but if you need to use custom annotations, override `void afterRegistration(Identifier identifier, Pair<Boolean, Field> fieldData)` (the first item of the pair `fieldData` is a boolean indicating whether it is a `RegistryEntry` and the second is a `java.lang.reflect.Field`).
 
 It is **strongly** recommended that you look at [`BlockRegistryInitializer`](https://github.com/diacritics-owo/circumflex/blob/main/src/main/java/diacritics/owo/registry/initalizer/BlockRegistryInitializer.java) and [`ItemRegistryInitializer`](https://github.com/diacritics-owo/circumflex/blob/main/src/main/java/diacritics/owo/registry/initalizer/ItemRegistryInitializer.java) for examples of dynamic registration and custom annotations.
 

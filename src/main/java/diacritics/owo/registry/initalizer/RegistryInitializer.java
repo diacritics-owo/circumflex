@@ -4,6 +4,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 import java.util.Arrays;
 import java.util.List;
@@ -17,7 +18,19 @@ public abstract class RegistryInitializer<T> {
 
   abstract public Registry<T> registry();
 
-  public final void register(String namespace) {
+  public RegistryInitializer() {}
+
+  public static final void register(Class<? extends RegistryInitializer<?>> class_,
+      String namespace) {
+    try {
+      class_.getDeclaredConstructor().newInstance().register(namespace);
+    } catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+        | InvocationTargetException | NoSuchMethodException | SecurityException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  protected final void register(String namespace) {
     List<Pair<Boolean, Field>> fields = Arrays.stream(this.getClass().getFields()).map(field -> {
       // registryentry
       if ((field.getType().equals(RegistryEntry.class)
@@ -50,7 +63,6 @@ public abstract class RegistryInitializer<T> {
     try {
       return registryEntry ? ((RegistryEntry<T>) field.get(this)).value() : (T) field.get(this);
     } catch (IllegalArgumentException | IllegalAccessException e) {
-      // TODO: handle this...?
       throw new RuntimeException(e);
     }
   }

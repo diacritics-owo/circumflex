@@ -3,6 +3,7 @@ package diacritics.owo;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import diacritics.owo.registry.initalizer.RegistryInitializer;
 
 public class TestMod implements ModInitializer {
 	public static final String MOD_ID = "testmod";
@@ -14,8 +15,8 @@ public class TestMod implements ModInitializer {
 
 		Commands.initialize();
 
-		new TestModItemGroups().register(MOD_ID);
-		new TestModItems().register(MOD_ID);
-		new TestModBlocks().register(MOD_ID);
+		RegistryInitializer.register(TestModItemGroups.class, MOD_ID);
+		RegistryInitializer.register(TestModItems.class, MOD_ID);
+		RegistryInitializer.register(TestModBlocks.class, MOD_ID);
 	}
 }
