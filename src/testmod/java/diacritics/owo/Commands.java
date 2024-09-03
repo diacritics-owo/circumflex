@@ -29,16 +29,16 @@ public class Commands {
 
     new Literal("mul2")
         .with(new Argument<>("value", IntegerArgumentType.integer()).execute(context -> {
-          final int value = IntegerArgumentType.getInteger(context, "value");
+          final int value = context.get("value", int.class);
           final int result = value * value;
-          context.getSource().sendFeedback(
+          context.source().sendFeedback(
               () -> Text.literal("%s × %s = %s".formatted(value, value, result)), false);
           return result;
         }).with(new Argument<>("value2", IntegerArgumentType.integer()).execute(context -> {
-          final int value = IntegerArgumentType.getInteger(context, "value");
-          final int value2 = IntegerArgumentType.getInteger(context, "value2");
+          final int value = context.get("value", int.class);
+          final int value2 = context.get("value2", int.class);
           final int result = value * value2;
-          context.getSource().sendFeedback(
+          context.source().sendFeedback(
               () -> Text.literal("%s × %s = %s".formatted(value, value2, result)), false);
           return result;
         }))).register();

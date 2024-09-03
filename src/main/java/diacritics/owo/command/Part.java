@@ -5,11 +5,9 @@ import java.util.List;
 import com.mojang.brigadier.builder.ArgumentBuilder;
 import net.minecraft.server.command.ServerCommandSource;
 
-// TODO: inconsistency with the brigadier builder (e.g. in testmod, just /mul2 doesn't do anything
-// but is valid)
 public abstract class Part<T extends ArgumentBuilder<ServerCommandSource, T>, U extends Part<T, U>> {
   private final String name;
-  private Executable command = (source) -> 1;
+  private Executable command;
   private List<ArgumentBuilder<ServerCommandSource, ?>> arguments = new ArrayList<>();
 
   public Part(String name) {
@@ -43,8 +41,14 @@ public abstract class Part<T extends ArgumentBuilder<ServerCommandSource, T>, U 
   }
 
   public T build() {
-    T result = this.argumentBuilder().executes(this.command);
+    T result = this.argumentBuilder();
+
+    if (this.command != null) {
+      result.executes(context -> this.command.run(context));
+    }
+
     this.arguments.forEach(argument -> result.then(argument));
+
     return result;
   }
 
