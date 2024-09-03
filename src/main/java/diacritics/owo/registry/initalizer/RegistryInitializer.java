@@ -12,7 +12,6 @@ import com.ibm.icu.impl.Pair;
 import diacritics.owo.annotation.Id;
 import diacritics.owo.util.Helpers;
 
-// TODO: more registry initializers
 public abstract class RegistryInitializer<T> {
   abstract public Class<T> entryClass();
 

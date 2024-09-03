@@ -30,4 +30,9 @@ public class Helpers {
       }
     }
   }
+
+  @SuppressWarnings("unchecked")
+  public static <T> Class<T> conform(Class<?> input) {
+    return (Class<T>) input;
+  }
 }
