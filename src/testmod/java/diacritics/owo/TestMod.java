@@ -9,5 +9,9 @@ public class TestMod implements ModInitializer {
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
 	@Override
-	public void onInitialize() {}
+	public void onInitialize() {
+		System.out.println("hello :3");
+
+		Commands.initialize();
+	}
 }
