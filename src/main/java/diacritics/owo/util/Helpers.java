@@ -18,15 +18,16 @@ public class Helpers {
         identifier.value().equals("") ? defaultIdentifier.getPath() : identifier.value());
   }
 
-  public static void registerGroup(Pair<Boolean, Field> fieldData, Item item) {
-    Group group = fieldData.second.getAnnotation(Group.class);
+  public static void addToGroups(Pair<Boolean, Field> fieldData, Item item) {
+    Group[] groups = fieldData.second.getAnnotationsByType(Group.class);
 
-    if (group != null) {
-      ItemGroupEvents.modifyEntriesEvent(
-          RegistryKey.of(RegistryKeys.ITEM_GROUP, Identifier.of(group.namespace(), group.value())))
-          .register(content -> {
-            content.add(item);
-          });
+    if (groups != null) {
+      for (Group group : groups) {
+        ItemGroupEvents.modifyEntriesEvent(RegistryKey.of(RegistryKeys.ITEM_GROUP,
+            Identifier.of(group.namespace(), group.value()))).register(content -> {
+              content.add(item);
+            });
+      }
     }
   }
 }

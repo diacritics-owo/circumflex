@@ -28,7 +28,7 @@ public class BlockRegistryInitializer extends RegistryInitializer<Block> {
       Item item = new BlockItem(this.getFieldValue(fieldData), new Item.Settings());
       Registry.register(Registries.ITEM, identifier, item);
 
-      Helpers.registerGroup(fieldData, item);
+      Helpers.addToGroups(fieldData, item);
     }
   }
 }

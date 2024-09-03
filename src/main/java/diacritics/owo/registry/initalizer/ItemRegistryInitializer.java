@@ -21,6 +21,6 @@ public abstract class ItemRegistryInitializer extends RegistryInitializer<Item> 
 
   @Override
   protected void afterRegistration(Identifier identifier, Pair<Boolean, Field> fieldData) {
-    Helpers.registerGroup(fieldData, this.getFieldValue(fieldData));
+    Helpers.addToGroups(fieldData, this.getFieldValue(fieldData));
   }
 }
