@@ -10,7 +10,7 @@ public class TestModItems extends ItemRegistryInitializer {
   public Item ITEM = new Item((new Item.Settings()));
 
   @Id(namespace = "owo", value = "uwu")
-  @Group(namespace = "testmod", value = "group")
+  @Group(namespace = TestMod.MOD_ID, value = "group")
   @Group("tools_and_utilities")
   public Item OWO = new Item((new Item.Settings()));
 

@@ -9,5 +9,5 @@ A Fabric/Quilt library mod
 
 ## Features
 
-- Registry initializer API (inspired by [owo-lib](https://github.com/wisp-forest/owo-lib))
+- [Registry initializer API](/registry-initializer) (inspired by [owo-lib](https://docs.wispforest.io/owo/registration/))
 - Command registration API
