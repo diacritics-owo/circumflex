@@ -9,10 +9,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import com.ibm.icu.impl.Pair;
-import diacritics.owo.util.Namespace;
-import diacritics.owo.util.Path;
+import diacritics.owo.annotation.Id;
+import diacritics.owo.util.Helpers;
 
-// TOOD: registryentry
+// TODO: registryentry
+// TODO: more registry initializers
+// TODO: repeatable annotations
 public abstract class RegistryInitializer<T> {
   abstract public Class<T> entryClass();
 
@@ -33,14 +35,13 @@ public abstract class RegistryInitializer<T> {
     for (Pair<Boolean, Field> fieldData : fields) {
       Field field = fieldData.second;
 
-      String ns = field.isAnnotationPresent(Namespace.class)
-          ? field.getDeclaredAnnotation(Namespace.class).value()
-          : namespace;
-      String path =
-          field.isAnnotationPresent(Path.class) ? field.getDeclaredAnnotation(Path.class).value()
-              : field.getName().toLowerCase();
+      Identifier defaultIdentifier = Identifier.of(namespace, field.getName().toLowerCase());
 
-      register(Identifier.of(ns, path), fieldData);
+      Identifier identifier = field.isAnnotationPresent(Id.class)
+          ? Helpers.toIdentifier(field.getAnnotation(Id.class), defaultIdentifier)
+          : defaultIdentifier;
+
+      register(identifier, fieldData);
     }
   }
 
@@ -63,7 +64,7 @@ public abstract class RegistryInitializer<T> {
   }
 
   protected void afterRegistration(Identifier identifier, Pair<Boolean, Field> fieldData) {
-    afterRegistration(identifier, getFieldValue(fieldData));
+    this.afterRegistration(identifier, this.getFieldValue(fieldData));
   }
 
   protected void afterRegistration(Identifier identifier, T value) {}

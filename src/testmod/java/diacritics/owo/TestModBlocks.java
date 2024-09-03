@@ -1,15 +1,17 @@
 package diacritics.owo;
 
+import diacritics.owo.annotation.Group;
+import diacritics.owo.annotation.Id;
+import diacritics.owo.annotation.NoItem;
 import diacritics.owo.registry.initalizer.BlockRegistryInitializer;
-import diacritics.owo.util.NoItem;
-import diacritics.owo.util.Path;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 
 public class TestModBlocks extends BlockRegistryInitializer {
   public Block BLOCK = new Block(AbstractBlock.Settings.create());
 
-  @Path("hewwo")
+  @Id("hewwo")
+  @Group(namespace = "testmod", value = "group")
   public Block HI = new Block(AbstractBlock.Settings.create());
 
   @NoItem

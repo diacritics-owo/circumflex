@@ -14,6 +14,7 @@ public class TestMod implements ModInitializer {
 
 		Commands.initialize();
 
+		new TestModItemGroups().register(MOD_ID);
 		new TestModItems().register(MOD_ID);
 		new TestModBlocks().register(MOD_ID);
 	}
