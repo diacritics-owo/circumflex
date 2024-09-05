@@ -3,11 +3,11 @@
   "id": "circumflex",
   "version": "${version}",
   "name": "Circumflex",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "description": "A Fabric/Quilt library mod",
   "authors": ["diacritics-owo"],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://diacritics-owo.github.io/circumflex/",
+    "sources": "https://github.com/diacritics-owo/circumflex/"
   },
   "license": "MIT",
   "icon": "assets/circumflex/icon.png",

@@ -1,0 +1,16 @@
+[artifact]
+folder = "build/libs"
+pattern = "circumflex-#.jar"
+game_versions = ["1.20.1"]
+loaders = ["fabric", "quilt"]
+
+[changelog]
+type = "editor"
+
+[modrinth]
+id = "JSxz5eBF"
+featured = true
+
+[github]
+repo = ["diacritics-owo", "circumflex"]
+draft = false
