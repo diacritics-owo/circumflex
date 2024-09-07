@@ -2,11 +2,13 @@ package diacritics.owo;
 
 import java.io.FileInputStream;
 import diacritics.owo.gui.widget.ImageWidget;
+import diacritics.owo.gui.widget.PathWidget;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.NarratedMultilineTextWidget;
 import net.minecraft.client.texture.NativeImage;
+import net.minecraft.predicate.NumberRange.FloatRange;
 import net.minecraft.text.Text;
 
 public class TestModScreen extends Screen {
@@ -21,6 +23,12 @@ public class TestModScreen extends Screen {
 
   @Override
   protected void init() {
+    FloatRange domain = FloatRange.between(-(this.width / 2), this.width / 2);
+
+    this.addDrawableChild(new PathWidget(domain, n -> n + (this.width / 2),
+        n -> (this.height / 2) - 3 * (Math.pow(n, 3) * (this.height / Math.pow(this.width, 3))))
+            .color(PathWidget.Color.solid(0xFFFF00FF)));
+
     this.text = this.addDrawableChild(
         new NarratedMultilineTextWidget(this.textRenderer, Text.literal("hello!"), this.width));
     this.text.setPosition((this.width - this.text.getWidth()) / 2, (this.height / 2) - (9 / 2));
@@ -43,7 +51,7 @@ public class TestModScreen extends Screen {
 
   @Override
   public void tick() {
-    this.n += 0.05;
+    this.n += 0.03;
     this.image.setPosition(
         (int) (Math.cos(this.n) * (this.width / 4)) + ((this.width - this.image.getWidth()) / 2),
         (int) (Math.sin(this.n) * (this.height / 4))

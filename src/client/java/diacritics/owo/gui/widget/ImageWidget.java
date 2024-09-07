@@ -18,6 +18,10 @@ public class ImageWidget extends ClickableWidget {
     this.image = image;
   }
 
+  public NativeImage getImage() {
+    return this.image;
+  }
+
   public void setImage(NativeImage image) {
     this.image = image;
     this.setWidth(image.getWidth());
