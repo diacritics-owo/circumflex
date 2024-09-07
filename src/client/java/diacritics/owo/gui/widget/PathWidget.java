@@ -14,6 +14,7 @@ public class PathWidget extends ClickableWidget {
   private Function<Double, Double> x;
   private Function<Double, Double> y;
   private Color color = Color.solid(0xFFFF0000);
+  private double step = 0.5;
 
   public PathWidget(FloatRange domain, Function<Double, Double> x, Function<Double, Double> y) {
     this(Text.empty(), domain, x, y);
@@ -29,6 +30,11 @@ public class PathWidget extends ClickableWidget {
 
   public PathWidget color(Color color) {
     this.color = color;
+    return this;
+  }
+
+  public PathWidget step(double step) {
+    this.step = step;
     return this;
   }
 
@@ -53,7 +59,7 @@ public class PathWidget extends ClickableWidget {
 
   @Override
   protected void renderButton(DrawContext context, int mouseX, int mouseY, float delta) {
-    for (double n = this.domain.getMin(); n < this.domain.getMax(); n += 1) {
+    for (double n = this.domain.getMin(); n < this.domain.getMax(); n += this.step) {
       int x = this.x.apply(n).intValue();
       int y = this.y.apply(n).intValue();
 
