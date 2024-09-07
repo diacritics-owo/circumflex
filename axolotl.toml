@@ -11,6 +11,10 @@ type = "editor"
 id = "JSxz5eBF"
 featured = true
 
+[[modrinth.dependencies]]
+id = "P7dR8mSH"
+dependency_type = "required"
+
 [github]
 repo = ["diacritics-owo", "circumflex"]
 draft = false
