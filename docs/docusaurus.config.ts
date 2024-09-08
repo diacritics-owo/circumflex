@@ -66,7 +66,7 @@ const config: Config = {
       copyright: `Copyright © ${new Date().getFullYear()} diacritics-owo`,
     },
     prism: {
-      additionalLanguages: ['java'],
+      additionalLanguages: ['java', 'toml', 'groovy'],
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
     },
