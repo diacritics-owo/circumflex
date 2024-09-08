@@ -23,7 +23,7 @@ new ImageWidget(0, 0,
 Example:
 
 ```java
-new PathWidget(FloatRange.between(0, this.height), n -> n, n -> this.height - n)
+new PathWidget(DoubleRange.between(0, this.height), n -> n, n -> this.height - n) // FloatRange for minecraft 1.20.1/circumflex 1.1.0
   .color(PathWidget.Color.solid(0xFFFF00FF)) // the color of the line - a custom color function may be specified with new PathWidget.Color(...) (default 0xFFFF0000)
   .step(1); // the step to use when calculating the values of the function (default 0.5)
 ```

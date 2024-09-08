@@ -1,6 +1,6 @@
 package diacritics.owo.registry.initalizer;
 
-import diacritics.owo.util.Helpers;
+import diacritics.owo.util.CircumflexHelpers;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -8,7 +8,7 @@ import net.minecraft.registry.Registry;
 public class BlockEntityRegistryInitializer extends RegistryInitializer<BlockEntityType<?>> {
   @Override
   public Class<BlockEntityType<?>> entryClass() {
-    return Helpers.conform(BlockEntityType.class);
+    return CircumflexHelpers.conform(BlockEntityType.class);
   }
 
   @Override

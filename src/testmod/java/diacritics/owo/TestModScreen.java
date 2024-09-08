@@ -8,7 +8,7 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.NarratedMultilineTextWidget;
 import net.minecraft.client.texture.NativeImage;
-import net.minecraft.predicate.NumberRange.FloatRange;
+import net.minecraft.predicate.NumberRange.DoubleRange;
 import net.minecraft.text.Text;
 
 public class TestModScreen extends Screen {
@@ -23,14 +23,14 @@ public class TestModScreen extends Screen {
 
   @Override
   protected void init() {
-    FloatRange domain = FloatRange.between(-(this.width / 2), this.width / 2);
+    DoubleRange domain = DoubleRange.between(-(this.width / 2), this.width / 2);
 
     this.addDrawableChild(new PathWidget(domain, n -> n + (this.width / 2),
         n -> (this.height / 2) - 3 * (Math.pow(n, 3) * (this.height / Math.pow(this.width, 3))))
             .color(PathWidget.Color.solid(0xFFFF00FF)));
 
     this.text = this.addDrawableChild(
-        new NarratedMultilineTextWidget(this.textRenderer, Text.literal("hello!"), this.width));
+        new NarratedMultilineTextWidget(this.width, Text.literal("hello!"), this.textRenderer, 6));
     this.text.setPosition((this.width - this.text.getWidth()) / 2, (this.height / 2) - (9 / 2));
 
     try {
@@ -60,9 +60,8 @@ public class TestModScreen extends Screen {
   }
 
   @Override
-  public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-    this.renderBackground(context);
-    context.drawCenteredTextWithShadow(this.textRenderer, this.title, this.width / 2, 70, 16777215);
-    super.render(context, mouseX, mouseY, delta);
+  public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
+    this.applyBlur(delta);
+    this.renderInGameBackground(context);
   }
 }

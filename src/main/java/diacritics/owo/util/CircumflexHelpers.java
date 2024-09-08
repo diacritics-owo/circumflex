@@ -10,7 +10,7 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import java.lang.reflect.Field;
 
-public class Helpers {
+public class CircumflexHelpers {
   public static Identifier toIdentifier(Id identifier, Identifier defaultIdentifier) {
     return Identifier.of(
         identifier.namespace().equals("") ? defaultIdentifier.getNamespace()

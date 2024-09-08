@@ -2,7 +2,7 @@ package diacritics.owo.registry.initalizer;
 
 import java.lang.reflect.Field;
 import com.ibm.icu.impl.Pair;
-import diacritics.owo.util.Helpers;
+import diacritics.owo.util.CircumflexHelpers;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -21,6 +21,6 @@ public abstract class ItemRegistryInitializer extends RegistryInitializer<Item> 
 
   @Override
   protected void afterRegistration(Identifier identifier, Pair<Boolean, Field> fieldData) {
-    Helpers.addToGroups(fieldData, this.getFieldValue(fieldData));
+    CircumflexHelpers.addToGroups(fieldData, this.getFieldValue(fieldData));
   }
 }

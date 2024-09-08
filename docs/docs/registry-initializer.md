@@ -59,7 +59,7 @@ Circumflex provides a few registry initializers by default:
 
 - `BlockEntityRegistryInitializer` (`Registries.BLOCK_ENTITY_TYPE`)
 - `BlockRegistryInitializer` (`Registries.BLOCK`; also registers `BlockItem`s by default - see [`@NoItem`](#noitem))
-- `EnchantmentRegistryInitializer` (`Registries.ENCHANTMENT`)
+- `EnchantmentRegistryInitializer` (`Registries.ENCHANTMENT`; 1.20.1 only)
 - `EntityRegistryInitializer` (`Registries.ENTITY_TYPE`)
 - `ItemGroupRegistryInitializer` (`Registries.ITEM_GROUP`)
 - `ItemRegistryInitializer` (`Registries.ITEM`)
@@ -73,7 +73,7 @@ Creating a registry initializer for a registry that Circumflex doesn't provide o
 public class ParticleTypeRegistryInitializer extends RegistryInitializer<ParticleType> {
   @Override
   public Class<ParticleType> entryClass() {
-    return ParticleType.class; // if it's generic, e.g. BlockEntityType<T>, use Helpers.conform
+    return ParticleType.class; // if it's generic, e.g. BlockEntityType<T>, use CircumflexHelpers.conform (Helpers.conform for circumflex 1.1.0)
   }
 
   @Override

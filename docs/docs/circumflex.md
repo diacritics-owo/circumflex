@@ -39,13 +39,13 @@ dependencies {
 ```
 
 ```toml title="gradle.properties"
-circumflex_version=1.1.0
+circumflex_version=1.2.0
 ```
 
 ```json title="fabric.mod.json"
 {
   "depends": {
-    "circumflex": "~1.1.0"
+    "circumflex": "~1.2.0"
   }
 }
 ```

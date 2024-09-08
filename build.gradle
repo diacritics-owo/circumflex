@@ -12,13 +12,6 @@ base {
 
 repositories {}
 
-sourceSets {
-  testmod {
-    runtimeClasspath += main.runtimeClasspath
-    compileClasspath += main.compileClasspath
-  }
-}
-
 loom {
 	splitEnvironmentSourceSets()
 
@@ -28,7 +21,18 @@ loom {
 			sourceSet sourceSets.client
 		}
 	}
+}
 
+sourceSets {
+  testmod {
+    runtimeClasspath += main.runtimeClasspath
+    compileClasspath += main.compileClasspath
+
+		runtimeClasspath += client.runtimeClasspath
+    compileClasspath += client.compileClasspath
+  }
+}
+loom {
 	runs {
     testmodClient {
 			inherit client
@@ -54,6 +58,7 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	testmodImplementation sourceSets.main.output
+	testmodImplementation sourceSets.client.output
 }
 
 processResources {
@@ -65,14 +70,14 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-	it.options.release = 17
+	it.options.release = 21
 }
 
 java {
 	withSourcesJar()
 
-	sourceCompatibility = JavaVersion.VERSION_17
-	targetCompatibility = JavaVersion.VERSION_17
+	sourceCompatibility = JavaVersion.VERSION_21
+	targetCompatibility = JavaVersion.VERSION_21
 }
 
 jar {

@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import com.ibm.icu.impl.Pair;
 import diacritics.owo.annotation.Id;
-import diacritics.owo.util.Helpers;
+import diacritics.owo.util.CircumflexHelpers;
 
 public abstract class RegistryInitializer<T> {
   abstract public Class<T> entryClass();
@@ -48,7 +48,7 @@ public abstract class RegistryInitializer<T> {
       Identifier defaultIdentifier = Identifier.of(namespace, field.getName().toLowerCase());
 
       Identifier identifier = field.isAnnotationPresent(Id.class)
-          ? Helpers.toIdentifier(field.getAnnotation(Id.class), defaultIdentifier)
+          ? CircumflexHelpers.toIdentifier(field.getAnnotation(Id.class), defaultIdentifier)
           : defaultIdentifier;
 
       register(identifier, fieldData);

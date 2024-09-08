@@ -25,14 +25,14 @@ public class ImageWidget extends ClickableWidget {
   public void setImage(NativeImage image) {
     this.image = image;
     this.setWidth(image.getWidth());
-    this.height = image.getHeight(); // there's no setheight method? (1.20.1)
+    this.setHeight(image.getHeight());
   }
 
   @Override
   protected void appendClickableNarrations(NarrationMessageBuilder builder) {}
 
   @Override
-  protected void renderButton(DrawContext context, int mouseX, int mouseY, float delta) {
+  protected void renderWidget(DrawContext context, int mouseX, int mouseY, float delta) {
     for (int x = 0; x < this.getWidth(); x++) {
       for (int y = 0; y < this.getHeight(); y++) {
         context.fill(x + this.getX(), y + this.getY(), x + this.getX() + 1, y + this.getY() + 1,

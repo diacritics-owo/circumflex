@@ -3,7 +3,7 @@ package diacritics.owo.registry.initalizer;
 import java.lang.reflect.Field;
 import com.ibm.icu.impl.Pair;
 import diacritics.owo.annotation.NoItem;
-import diacritics.owo.util.Helpers;
+import diacritics.owo.util.CircumflexHelpers;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -28,7 +28,7 @@ public class BlockRegistryInitializer extends RegistryInitializer<Block> {
       Item item = new BlockItem(this.getFieldValue(fieldData), new Item.Settings());
       Registry.register(Registries.ITEM, identifier, item);
 
-      Helpers.addToGroups(fieldData, item);
+      CircumflexHelpers.addToGroups(fieldData, item);
     }
   }
 }
