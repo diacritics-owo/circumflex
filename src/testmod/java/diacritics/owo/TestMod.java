@@ -18,5 +18,6 @@ public class TestMod implements ModInitializer {
 		RegistryInitializer.register(TestModItemGroups.class, MOD_ID);
 		RegistryInitializer.register(TestModItems.class, MOD_ID);
 		RegistryInitializer.register(TestModBlocks.class, MOD_ID);
+		RegistryInitializer.register(TestModChunkGenerators.class, MOD_ID);
 	}
 }

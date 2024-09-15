@@ -21,6 +21,8 @@ loom {
 			sourceSet sourceSets.client
 		}
 	}
+
+	accessWidenerPath = file("src/main/resources/circumflex.accesswidener")
 }
 
 sourceSets {
@@ -32,6 +34,7 @@ sourceSets {
     compileClasspath += client.compileClasspath
   }
 }
+
 loom {
 	runs {
     testmodClient {

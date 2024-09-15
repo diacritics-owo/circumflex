@@ -1,0 +1,6 @@
+accessWidener v2 named
+
+transitive-extendable class net/minecraft/world/gen/chunk/NoiseChunkGenerator
+
+transitive-accessible field net/minecraft/world/gen/noise/NoiseConfig noiseRouter Lnet/minecraft/world/gen/noise/NoiseRouter;
+transitive-mutable field net/minecraft/world/gen/noise/NoiseConfig noiseRouter Lnet/minecraft/world/gen/noise/NoiseRouter;

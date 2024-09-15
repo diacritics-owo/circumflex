@@ -12,6 +12,7 @@
   "license": "MIT",
   "icon": "assets/circumflex/icon.png",
   "environment": "*",
+  "accessWidener": "circumflex.accesswidener",
   "entrypoints": {
     "main": ["diacritics.owo.Circumflex"],
     "client": ["diacritics.owo.CircumflexClient"]
