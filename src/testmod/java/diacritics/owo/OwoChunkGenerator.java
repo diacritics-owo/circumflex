@@ -2,10 +2,9 @@ package diacritics.owo;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import diacritics.owo.util.CircumflexHelpers;
 import diacritics.owo.world.gen.chunk.CustomNoiseChunkGenerator;
 import diacritics.owo.world.gen.noise.NoiseRouterBuilder;
-import net.minecraft.registry.BuiltinRegistries;
-import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.world.biome.source.BiomeSource;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
@@ -36,15 +35,13 @@ public class OwoChunkGenerator extends CustomNoiseChunkGenerator {
 
   @Override
   public NoiseConfig wrapNoiseConfig(NoiseConfig noiseConfig) {
-    noiseConfig.noiseRouter =
-        new NoiseRouterBuilder(noiseConfig.getNoiseRouter()).finalDensity(DensityFunctionTypes.mul(
-            DensityFunctionTypes.noise(BuiltinRegistries.createWrapperLookup()
-                .getWrapperOrThrow(RegistryKeys.NOISE_PARAMETERS)
-                .getOrThrow(NoiseParametersKeys.GRAVEL), 1, 1),
-            DensityFunctionTypes.noise(BuiltinRegistries.createWrapperLookup()
-                .getWrapperOrThrow(RegistryKeys.NOISE_PARAMETERS)
-                .getOrThrow(NoiseParametersKeys.CAVE_CHEESE), 1, 1)))
-            .build();
+    noiseConfig.noiseRouter = new NoiseRouterBuilder(noiseConfig.getNoiseRouter())
+        .finalDensity(DensityFunctionTypes.mul(
+            DensityFunctionTypes
+                .noise(CircumflexHelpers.noiseParameters(NoiseParametersKeys.GRAVEL), 1, 1),
+            DensityFunctionTypes
+                .noise(CircumflexHelpers.noiseParameters(NoiseParametersKeys.CAVE_CHEESE), 1, 1)))
+        .build();
 
     return noiseConfig;
   }

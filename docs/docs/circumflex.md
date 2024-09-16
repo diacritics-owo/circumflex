@@ -13,6 +13,7 @@ A Fabric/Quilt library mod
 - [Command registration API](/command-registration)
 - [More widgets](/widgets)
 - [`ChunkGenerator`s](/chunkgenerators)
+- [Some general utilities](/utilities)
 
 ## Adding the Dependency
 
