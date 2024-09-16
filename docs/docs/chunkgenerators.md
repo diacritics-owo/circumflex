@@ -4,6 +4,8 @@ sidebar_position: 4
 
 # `ChunkGenerator`s
 
+From version 1.3.0 onwards, Circumflex provides some `ChunkGenerator`s to ease the process of creating one.
+
 ## `CustomNoiseChunkGenerator`
 
 `CustomNoiseChunkGenerator` allows you to create a `NoiseChunkGenerator` with custom noise configuration from within code. While configuring `NoiseChunkGenerator` is possible entirely within datapacks (see https://minecraft.wiki/w/Noise_router), doing it within code allows for greater customisability.
@@ -36,15 +38,13 @@ public class MyChunkGenerator extends CustomNoiseChunkGenerator {
   @Override
   public NoiseConfig wrapNoiseConfig(NoiseConfig noiseConfig) {
     // this replaces the final density function - see https://minecraft.wiki/w/Noise_router
-    noiseConfig.noiseRouter =
-        new NoiseRouterBuilder(noiseConfig.getNoiseRouter()).finalDensity(DensityFunctionTypes.mul(
-            DensityFunctionTypes.noise(BuiltinRegistries.createWrapperLookup()
-                .getWrapperOrThrow(RegistryKeys.NOISE_PARAMETERS)
-                .getOrThrow(NoiseParametersKeys.GRAVEL), 1, 1),
-            DensityFunctionTypes.noise(BuiltinRegistries.createWrapperLookup()
-                .getWrapperOrThrow(RegistryKeys.NOISE_PARAMETERS)
-                .getOrThrow(NoiseParametersKeys.CAVE_CHEESE), 1, 1)))
-            .build();
+    noiseConfig.noiseRouter = new NoiseRouterBuilder(noiseConfig.getNoiseRouter())
+        .finalDensity(DensityFunctionTypes.mul(
+            DensityFunctionTypes
+                .noise(CircumflexHelpers.noiseParameters(NoiseParametersKeys.GRAVEL), 1, 1),
+            DensityFunctionTypes
+                .noise(CircumflexHelpers.noiseParameters(NoiseParametersKeys.CAVE_CHEESE), 1, 1)))
+        .build();
 
     return noiseConfig;
   }
