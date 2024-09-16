@@ -1,3 +1,7 @@
+---
+sidebar_position: 3
+---
+
 # More widgets
 
 A demo of these widgets may be viewed by cloning this repository, running `./gradlew runTestmodClient` (`./gradlew.bat runTestmodClient` on Windows), and pressing T in-game.

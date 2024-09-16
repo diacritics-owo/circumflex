@@ -12,6 +12,7 @@ A Fabric/Quilt library mod
 - [Registry initializer API](/registry-initializer) (inspired by [owo-lib](https://docs.wispforest.io/owo/registration/))
 - [Command registration API](/command-registration)
 - [More widgets](/widgets)
+- [`ChunkGenerator`s](/chunkgenerators)
 
 ## Adding the Dependency
 

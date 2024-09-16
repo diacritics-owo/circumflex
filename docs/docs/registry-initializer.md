@@ -59,6 +59,7 @@ Circumflex provides a few registry initializers by default:
 
 - `BlockEntityRegistryInitializer` (`Registries.BLOCK_ENTITY_TYPE`)
 - `BlockRegistryInitializer` (`Registries.BLOCK`; also registers `BlockItem`s by default - see [`@NoItem`](#noitem))
+- `ChunkGeneratorRegistryInitializer` - (`Registries.CHUNK_GENERATOR`; also see [`ChunkGenerator`s](/chunkgenerators))
 - `EnchantmentRegistryInitializer` (`Registries.ENCHANTMENT`; 1.20.1 only)
 - `EntityRegistryInitializer` (`Registries.ENTITY_TYPE`)
 - `ItemGroupRegistryInitializer` (`Registries.ITEM_GROUP`)

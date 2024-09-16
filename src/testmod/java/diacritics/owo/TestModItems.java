@@ -15,7 +15,12 @@ public class TestModItems extends ItemRegistryInitializer {
   public static final Item OWO = new Item((new Item.Settings()));
 
   @Id(namespace = "owo")
-  public static final RegistryEntry<Item> ANOTHER = RegistryEntry.of(new Item((new Item.Settings())));
+  public static final RegistryEntry<Item> ANOTHER =
+      RegistryEntry.of(new Item((new Item.Settings())));
+
+  // multiple words
+  public static final RegistryEntry<Item> YET_ANOTHER_ONE =
+      RegistryEntry.of(new Item((new Item.Settings())));
 
   public static final String ignored = "this string field will be ignored";
 }

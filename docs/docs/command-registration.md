@@ -1,3 +1,7 @@
+---
+sidebar_position: 2
+---
+
 # Command Registration API
 
 Circumflex provides a wrapper around Mojang's [Brigadier](https://github.com/mojang/brigadier) that allows for easier and more flexible command building and registration.
